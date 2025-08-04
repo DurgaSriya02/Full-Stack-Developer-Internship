@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Intern Project</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            background-color: #f0f4f8; /* A very light blue-gray background */
+            font-family: 'Poppins', sans-serif; /* A new, clean font */
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .page {
+            display: none; /* Hide all pages by default */
+            max-width: 700px;
+            margin: 0 auto; /* Center the content */
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 12px; /* Nicely rounded corners */
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1); /* A more prominent shadow */
+            transition: all 0.3s ease-in-out;
+        }
+        
+        .page.active {
+            display: block; /* Show the active page */
+        }
+        
+        /* A fun, colorful gradient for the dashboard page */
+        #dashboard-page.active {
+            background: linear-gradient(135deg, #e0f2fe 0%, #d4e7f8 100%);
+            box-shadow: 0 12px 30px rgba(66, 153, 225, 0.2);
+        }
+
+        h1 {
+            color: #1e293b;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #4a5568;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #4299e1;
+        }
+
+        .button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #4299e1;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        
+        .button:hover {
+            background-color: #3182ce;
+            transform: translateY(-2px);
+        }
+        
+        .button-secondary {
+            background-color: #718096;
+        }
+
+        .button-secondary:hover {
+            background-color: #4a5568;
+        }
+
+        /* --- Dashboard Specific Styles --- */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .info-card {
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+            color: #fff;
+            transition: transform 0.3s;
+        }
+        
+        .info-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .info-card h2 {
+            margin: 0 0 10px 0;
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: #fff;
+        }
+        
+        .info-card p {
+            margin: 0;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .info-card-green {
+            background-color: #48bb78; /* A nice green for donations */
+        }
+        
+        .info-card-purple {
+            background-color: #9f7aea; /* A soft purple for personal info */
+        }
+
+        .reward-card {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .reward-unlocked {
+            background-color: #d6f6d6; /* Light green for unlocked rewards */
+            color: #38a169;
+            font-weight: 600;
+        }
+
+        .reward-locked {
+            background-color: #e2e8f0; /* Light gray for locked rewards */
+            color: #718096;
+            font-weight: 600;
+        }
+
+        .leaderboard-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .leaderboard-table th, .leaderboard-table td {
+            border: 1px solid #cbd5e0;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        .leaderboard-table th {
+            background-color: #e2e8f0;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="login-page" class="page active">
+        <h1>Login</h1>
+        <form id="login-form">
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="intern@example.com" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="••••••••" required>
+            </div>
+            <button type="submit" class="button">Log In</button>
+        </form>
+    </div>
+
+    <div id="dashboard-page" class="page">
+        <h1>Dashboard</h1>
+        
+        <div class="info-grid">
+            <div class="info-card info-card-purple">
+                <h2>Intern Name</h2>
+                <p id="intern-name">Loading...</p>
+            </div>
+            <div class="info-card info-card-purple">
+                <h2>Referral Code</h2>
+                <p id="referral-code">Loading...</p>
+            </div>
+            <div class="info-card info-card-green" style="grid-column: 1 / -1;">
+                <h2>Total Donations Raised</h2>
+                <p id="donations-raised">$0.00</p>
+            </div>
+        </div>
+        
+        <h2>Rewards & Unlockables</h2>
+        <div class="reward-card reward-unlocked">
+            <p><strong>Badge 1:</strong> First 100 donations (UNLOCKED)</p>
+        </div>
+        <div class="reward-card reward-locked">
+            <p><strong>Badge 2:</strong> Raise $1,000 (LOCKED)</p>
+        </div>
+        
+        <button id="view-leaderboard-btn" class="button button-secondary" style="margin-top: 30px;">View Leaderboard</button>
+    </div>
+
+    <div id="leaderboard-page" class="page">
+        <h1>Leaderboard</h1>
+        
+        <table class="leaderboard-table">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Name</th>
+                    <th>Donations</th>
+                </tr>
+            </thead>
+            <tbody id="leaderboard-body">
+                </tbody>
+        </table>
+        
+        <button id="back-to-dashboard-btn" class="button button-secondary" style="margin-top: 30px;">Back to Dashboard</button>
+    </div>
+
+    <script>
+        // We'll set up our basic variables here.
+        const loginPage = document.getElementById('login-page');
+        const dashboardPage = document.getElementById('dashboard-page');
+        const leaderboardPage = document.getElementById('leaderboard-page');
+        
+        const loginForm = document.getElementById('login-form');
+        const viewLeaderboardBtn = document.getElementById('view-leaderboard-btn');
+        const backToDashboardBtn = document.getElementById('back-to-dashboard-btn');
+        
+        // This is the base URL for our Java backend.
+        const BASE_URL = 'http://localhost:8080/api';
+
+        // This function shows one page and hides the others.
+        function showPage(pageToShow) {
+            loginPage.classList.remove('active');
+            dashboardPage.classList.remove('active');
+            leaderboardPage.classList.remove('active');
+            pageToShow.classList.add('active');
+        }
+
+        // This function fetches user data from the Java backend.
+        async function fetchDashboardData() {
+            try {
+                const response = await fetch(`${BASE_URL}/dashboard`);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch dashboard data');
+                }
+                const userData = await response.json();
+                
+                document.getElementById('intern-name').textContent = userData.name;
+                document.getElementById('referral-code').textContent = userData.referralCode;
+                document.getElementById('donations-raised').textContent = `$${userData.donationsRaised.toFixed(2)}`;
+                
+                showPage(dashboardPage);
+            } catch (error) {
+                console.error('Error fetching dashboard data:', error);
+                alert('Could not connect to the backend. Please ensure the Java server is running.');
+            }
+        }
+        
+        // This function fetches leaderboard data from the Java backend.
+        async function fetchLeaderboardData() {
+            try {
+                const response = await fetch(`${BASE_URL}/leaderboard`);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch leaderboard data');
+                }
+                const leaderboardData = await response.json();
+                
+                const leaderboardBody = document.getElementById('leaderboard-body');
+                leaderboardBody.innerHTML = '';
+                
+                leaderboardData.forEach((user, index) => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${index + 1}</td>
+                        <td>${user.name}</td>
+                        <td>$${user.donations.toFixed(2)}</td>
+                    `;
+                    leaderboardBody.appendChild(row);
+                });
+                
+                showPage(leaderboardPage);
+            } catch (error) {
+                console.error('Error fetching leaderboard data:', error);
+                alert('Could not connect to the backend. Please ensure the Java server is running.');
+            }
+        }
+
+        // Event Listeners: These listen for when we click on buttons.
+        loginForm.addEventListener('submit', (event) => {
+            event.preventDefault(); // This stops the form from refreshing the page.
+            fetchDashboardData();
+        });
+        
+        viewLeaderboardBtn.addEventListener('click', () => {
+            fetchLeaderboardData();
+        });
+
+        backToDashboardBtn.addEventListener('click', () => {
+            fetchDashboardData();
+        });
+        
+        // When the page first loads, we show the login page.
+        document.addEventListener('DOMContentLoaded', () => {
+            showPage(loginPage);
+        });
+    </script>
+</body>
+</html>
