@@ -1,9 +1,10 @@
 # Full-Stack-Developer-Internship
 
-Intern Project Dashboard
+# Intern Project Dashboard
+
 This project is a simple web application designed to demonstrate a basic client-server architecture. It features a frontend dashboard that fetches data from a separate Java-based backend.
 
-Features
+## Features
 User Dashboard: Displays an intern's name, referral code, and total donations raised.
 
 Leaderboard: Shows a ranked list of interns based on their donation amounts.
@@ -12,12 +13,12 @@ Page Navigation: Allows seamless switching between the dashboard and leaderboard
 
 Simulated Backend: The backend provides mock data to the frontend through a REST API.
 
-Technologies Used
-Frontend:
+## Technologies Used
+### Frontend:
 
 HTML5, CSS3, JavaScript (for all user interface and logic).
 
-Backend:
+### Backend:
 
 Java (version 17 or higher).
 
@@ -25,19 +26,19 @@ Spring Boot (a framework for building Java applications).
 
 Maven (a build automation and project management tool).
 
-Getting Started
+## Getting Started
 To run this project, you need to set up both the backend and the frontend.
 
 1. Backend Setup (Java)
 The backend provides the data for the frontend. It is built using Spring Boot and managed by Maven.
 
-Prerequisites:
+### Prerequisites:
 
 Java Development Kit (JDK) 17 or higher.
 
 Maven installed on your machine.
 
-Instructions:
+### Instructions:
 
 Create the project directory:
 
