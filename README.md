@@ -80,3 +80,7 @@ When you click "View Leaderboard", another fetch request is sent to http://local
 The backend returns the data as JSON, and the frontend updates the page content accordingly.
 
 Important Note: The frontend and backend are two separate applications. The frontend will not work correctly unless the Java backend server is running in the background.
+
+<img width="1133" height="598" alt="Screenshot 2025-08-04 111344" src="https://github.com/user-attachments/assets/8421934d-43e1-48f6-81ad-85873d094fb3" />
+
+<img width="800" height="781" alt="Screenshot 2025-08-04 111411" src="https://github.com/user-attachments/assets/0c11e608-4dd5-475d-8878-bd593d373f97" />
